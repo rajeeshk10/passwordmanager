@@ -9,9 +9,9 @@ static defaultAction = "index"
      }
 
      def validateCredentials(){
+     //these values also u can save as encrypted text. and while entering the key . decrypt and validate.
        def username = grailsApplication.config.getProperty('info.app.username')
        def password = grailsApplication.config.getProperty('info.app.password')
-       println 'username - '+username + ' - password - '+password
        render(view : "login")
      }
 
