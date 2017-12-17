@@ -16,6 +16,7 @@ class HomeController {
 
 
     def viewAccount(){
+        //here u can call decrypt and retrieve data
     }
 
 
