@@ -15,19 +15,14 @@ class UserController {
 
     }
 
-    //method to Register different account types like , bank account, credit card,social , email ,
-    // imt sorrentovalley etc.
     @CompileStatic
     def registerAccountTypes(){
-
-      // render (view : 'registerAccountTypes', model : [accountType : new AccountType()])
-      // [accountType : new AccountType() , accountCategoryList  :  AccountCategory.list()]
       return [accountType : new AccountType()]
     }
 
     @CompileStatic
     def saveAccountTypes(){
-
+        AccountType accountTypeInstance = new AccountType(params)
     }
 
     def listAccountTypes(){
