@@ -4,6 +4,9 @@ import groovy.transform.CompileStatic
 
 class UserController {
 
+UserService userService
+// static allowedMethods = [saveAccountTypes: "POST", createUserProfile: "POST", deleteUserProfiles: "POST"]
+
     def index() { }
 
 
@@ -20,9 +23,11 @@ class UserController {
       return [accountType : new AccountType()]
     }
 
-    @CompileStatic
+
     def saveAccountTypes(){
-        AccountType accountTypeInstance = new AccountType(params)
+        AccountType accountTypeInstance = new AccountType(params.accountType)
+        userService.validateAndSaveAccountType(accountTypeInstance)
+        render (view :'success')
     }
 
     def listAccountTypes(){

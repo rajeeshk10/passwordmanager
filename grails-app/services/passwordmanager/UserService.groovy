@@ -5,8 +5,15 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class UserService {
 
-    def serviceMethod() {
+    def serviceMethod(genericObject) {
 
+    }
+
+
+    def validateAndSaveAccountType(AccountType accountType){
+
+      accountType.typeValue=accountType.typeName
+      accountType.save(flush : true)
     }
 
     def saveUserProfile(){
@@ -17,10 +24,6 @@ class UserService {
 
     }
 
-    //method to Register different account types like , bank account, credit card,social , email ,
-    // imt sorrentovalley etc.
-    def registerAccountTypes(){
 
-    }
 
 }

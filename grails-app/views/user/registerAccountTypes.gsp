@@ -7,7 +7,7 @@
     <%@ page import="passwordmanager.AccountType" %>
 </head>
 <body>
-<g:form name="accountRegistration" action="saveAccountTypes"  class="form-horizontal">
+<g:form name="accountRegistration"   class="form-horizontal">
 
 <fieldset>
 
@@ -38,7 +38,7 @@
     <span class="col-md-4"></span>
     <div class="col-md-8">
 
-      <g:actionSubmit class="btn btn-success" value="${message(code:'label.submit')}"   onclick="return confirm('Are you sure???')" />
+      <g:actionSubmit class="btn btn-success" value="${message(code:'label.submit')}"    action="saveAccountTypes" onclick="return confirm('Are you sure???')" />
 
 
       <button id="button2id" name="button2id" class="btn btn-danger">Cancel</button>

@@ -3,10 +3,10 @@ package passwordmanager
 class AccountType {
 
   String typeName
-  String typeValue
+  String typeValue 
   AccountCategory accountCategory
 
-  
+
     static constraints = {
     }
 }
