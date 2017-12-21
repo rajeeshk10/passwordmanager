@@ -59,7 +59,7 @@ dependencies {
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 
     runtime 'mysql:mysql-connector-java:5.1.29'
-  
+    compile "org.grails.plugins:mail:2.0.0.RC6"
 
 }
 
