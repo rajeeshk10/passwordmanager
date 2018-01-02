@@ -11,7 +11,6 @@ class UserService {
 
 
     def validateAndSaveAccountType(AccountType accountType){
-
       accountType.typeValue=accountType.typeName
       accountType.save(flush : true)
     }
