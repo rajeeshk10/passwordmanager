@@ -30,13 +30,14 @@ endpoints:
     enabled: false
     jmx:
         enabled: true
------#mail configuration
+---
+# mail configuration
 grails:
      mail:
           host: "smtp.gmail.com"
           port: 465
-          username: "rajeesh.apps@gmail.com"
-          password: "rajeeshapps"
+          username: "test@gmail.com"
+          password: "test"
           props:
               mail.smtp.auth: "true"
               mail.smtp.socketFactory.port: "465"
@@ -109,14 +110,17 @@ dataSource:
     jmxExport: true
     driverClassName: com.mysql.jdbc.Driver
     dialect : org.hibernate.dialect.MySQL5InnoDBDialect
-    username: root
-    password: rajeesh10
 
 environments:
+    localdev:
+            dbCreate: none
     development:
         dataSource:
             dbCreate: none
-            url: jdbc:mysql://localhost:3306/pwdmgr
+            url: 'jdbc:mysql://localhost:3326/pwdmgr?useUnicode=yes&characterEncoding=UTF-8'
+            username: 'RootUser'
+            password: '@Password123'
+
     test:
         dataSource:
             dbCreate: update

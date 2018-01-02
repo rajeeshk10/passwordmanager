@@ -4,8 +4,8 @@ class AccountType {
 
   String typeName
   String typeValue 
-  AccountCategory accountCategory
 
+  static hasOne = [accountCategory : AccountCategory]
 
     static constraints = {
     }

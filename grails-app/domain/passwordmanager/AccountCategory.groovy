@@ -4,8 +4,9 @@ class AccountCategory {
 
   String category
 
-  static  belongsTo =[accountType : AccountType]
+  static hasMany = [accountType : AccountType]
 
     static constraints = {
+      accountType nullable: true
     }
 }
