@@ -4,7 +4,7 @@ import groovy.transform.CompileStatic
 
 class UserController {
 
-UserService userService
+    UserService userService
 
     def index() { }
 
@@ -19,7 +19,7 @@ UserService userService
 
     @CompileStatic
     def registerAccountTypes(){
-      return [accountType : new AccountType()]
+        return [accountType : new AccountType()]
     }
 
 
@@ -30,7 +30,8 @@ UserService userService
     }
 
     def listAccountTypes(){
-      //method to pull out list of account types before registring
+        //method to pull out list of account types before registring
+        render (view : 'success')
     }
 
 }

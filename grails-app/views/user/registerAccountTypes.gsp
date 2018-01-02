@@ -25,7 +25,7 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="selectbasic">Select Basic</label>
+  <label class="col-md-4 control-label" >Select Basic</label>
   <div class="col-md-4">
   <g:select name="accountType.accountCategory"  from="${AccountCategory.list()}" value="${accountType?.accountCategory}"
           optionKey="id" optionValue="category" noSelection="${['null':'Select One...']}"/>
