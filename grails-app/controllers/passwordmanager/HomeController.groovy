@@ -21,14 +21,15 @@ class HomeController {
     def saveAccount(){
         def secretKey= params.secretKey
         Account account=new Account(params.account)
-        homeService.validateAndSave(account)
-        redirect (action : "listAllAccounts")
+        def result = homeService.saveAccount(account,secretKey)
+        if(result.success){
+            redirect (action : "listAllAccounts" , params: [secretKey: secretKey])
+        }
     }
 
 
     def viewAccount(){
         //here u can call decrypt and retrieve data
-
     }
 
 
@@ -52,9 +53,10 @@ class HomeController {
 
 
     def listAllAccounts(){
+        def secretKey= params.secretKey
         List accountObjList = new ArrayList()
         Account.list().each{accountObj ->
-            Account actObj=homeService.decryptAccountObj(accountObj)
+            Account actObj=homeService.decryptAccountObj(accountObj,secretKey)
             accountObjList.add(actObj)
         }
         render (view : 'index' , model: [listOfAccounts : accountObjList])

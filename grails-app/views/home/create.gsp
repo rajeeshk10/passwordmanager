@@ -41,9 +41,17 @@
     </div>
 
     <!-- Text input-->
+    %{--<div class="form-group">--}%
+        %{--<label class="col-md-4 control-label" >Secret Key</label>--}%
+        %{--<div class="col-md-4" id="remote">--}%
+            %{--<input id="textinput" name="secretKey" type="text" placeholder="placeholder" class="form-control input-md typeahead">--}%
+        %{--</div>--}%
+    %{--</div>--}%
+
+
     <div class="form-group">
         <label class="col-md-4 control-label" >Secret Key</label>
-        <div class="col-md-4" id="remote">
+        <div class="col-md-4" >
             <input id="textinput" name="secretKey" type="text" placeholder="placeholder" class="form-control input-md typeahead">
         </div>
     </div>

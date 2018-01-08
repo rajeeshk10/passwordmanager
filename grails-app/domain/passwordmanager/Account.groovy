@@ -3,29 +3,31 @@ package passwordmanager
 
 class Account {
 
-  def cryptographicService
+//    def cryptographicService
 
-  byte[] username
-  byte[] password
+    byte[] username
+    byte[] password
 
-  AccountType accountType
-  String accountName
+    AccountType accountType
+    String accountName
+    Date lastUpdated
+    boolean emailSentFlag
 
-  String tempUsername
-  String tempPassword
 
-  static transients = ['tempUsername' , 'tempPassword']
+    String tempUsername
+    String tempPassword
 
-  static constraints = {
-    accountName nullable: true
-  }
+    static transients = ['tempUsername' , 'tempPassword']
 
-  static mapping = {
-    autowire  true
-  }
+    static constraints = {
+        accountName nullable: true
+    }
 
-  def beforeValidate(){
-    this.username = cryptographicService.encryptDomainFields(this.tempUsername)
-    this.password = cryptographicService.encryptDomainFields(this.tempPassword)
-  }
+    static mapping = {
+    }
+
+    def setDefaultProperties(){
+        this.lastUpdated = new Date()
+        this.emailSentFlag = true
+    }
 }
