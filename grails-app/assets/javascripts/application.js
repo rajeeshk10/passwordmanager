@@ -55,3 +55,18 @@ $('#remote .typeahead').typeahead(null, {
     source: bestPictures
 });
 /*------------------coding with bootstrap end-------------------------------------*/
+
+
+var deleteAccount = function () {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // document.getElementById("demo").innerHTML = this.responseText;
+            var listOfUserName =  this.responseText;
+            console.log(listOfUserName);
+        }
+    };
+    xhttp.open("GET", "/home/getListOfUserNames", true);
+    xhttp.send();
+
+};

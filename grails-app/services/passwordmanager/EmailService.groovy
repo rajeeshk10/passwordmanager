@@ -16,10 +16,6 @@ class EmailService{
        }catch (Exception ex){
             println ex
        }
-
-      // flash.message = "Message sent at "+new Date()
-      // redirect action:"index"
-
     }
 
     def generateEmailContent(Account account,EmailTemplate emailTemplate,EmailContent emailContent){
@@ -48,8 +44,11 @@ class EmailService{
 
     }
 
-    def sendAccountDeleteEmail(){
-
+    def sendAccountDeleteEmail(String toAdress, Account account){
+        EmailContent emailContent=new EmailContent(address: toAdress)
+        EmailTemplate emailTemplate=EmailTemplate.findByName(EmailTemplate.ACCOUNT_DELETED)
+        generateEmailContent(account,emailTemplate,emailContent)
+        send(emailContent)
     }
 
 }

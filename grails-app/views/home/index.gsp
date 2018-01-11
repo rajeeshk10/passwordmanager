@@ -19,6 +19,7 @@
             <th>Account Type</th>
             <th>Username</th>
             <th>Password</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
                 <td>${it.accountType.typeName}</td>
                 <td>${it.tempUsername}</td>
                 <td>${it.tempPassword}</td>
+                <td><g:link  class="btn btn-info" action="viewAccount" id="${it.id}">view</g:link></td>
             </tr>
         </g:each>
 

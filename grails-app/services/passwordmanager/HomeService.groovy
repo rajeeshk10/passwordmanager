@@ -1,17 +1,17 @@
 package passwordmanager
 
 import grails.gorm.transactions.Transactional
+import groovy.transform.CompileStatic
 
 
 @Transactional
 class HomeService {
 
-    def cryptographicService
+    CryptographicService cryptographicService
     def messageSource
-    def emailService
+    EmailService emailService
 
-static final String DEFAULT_EMAIL="rajeesh.kulangara@gmail.com"
-
+    static final String DEFAULT_EMAIL="rajeesh.kulangara@gmail.com"
 
     def  validateAndSave(Account account) {
         def result = [:]
@@ -30,7 +30,6 @@ static final String DEFAULT_EMAIL="rajeesh.kulangara@gmail.com"
     }
 
 
-
     def saveAccount(Account account , String secretKey){
         account.username=cryptographicService.encryptDomainFields(account.tempUsername ,secretKey)
         account.password = cryptographicService.encryptDomainFields(account.tempPassword ,secretKey)
@@ -42,19 +41,32 @@ static final String DEFAULT_EMAIL="rajeesh.kulangara@gmail.com"
         return result
     }
 
-    def deleteAccount(){
-
+    def deleteAccount(Long accountId,String secretKey){
+        Account account=Account.findById(accountId)
+        def statusFlag=false
+        if(account){
+            account.tempUsername = cryptographicService.decryptDomainFields(account.username ,secretKey)
+            account.delete()
+            emailService.sendAccountDeleteEmail(DEFAULT_EMAIL,account)
+            statusFlag=true
+        }
+        return statusFlag
     }
 
     def updateAccount(){
 
     }
 
-    def viewAccount(){
-
+    def viewAccount(Long accountId, secretKey){
+        Account account= Account.findById(accountId)
+        if(account){
+            account.tempUsername=cryptographicService.decryptDomainFields(account.username,secretKey)
+            account.password=cryptographicService.decryptDomainFields(account.password,secretKey)
+        }
+        return account
     }
 
-
+    @CompileStatic
     def getListOfUsernames(input){
         def grailsCriteria = Account.createCriteria()
         def listOfUserNames = grailsCriteria.list {
@@ -63,7 +75,7 @@ static final String DEFAULT_EMAIL="rajeesh.kulangara@gmail.com"
         return listOfUserNames
     }
 
-
+    @CompileStatic
     def decryptAccountObj(Account accountObj, String secretKey){
         accountObj.tempUsername = cryptographicService.decryptDomainFields(accountObj.username ,secretKey)
         accountObj.tempPassword= cryptographicService.decryptDomainFields(accountObj.password , secretKey)

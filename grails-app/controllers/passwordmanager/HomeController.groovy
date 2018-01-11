@@ -1,6 +1,7 @@
 package passwordmanager
 
 import grails.converters.JSON
+import groovy.transform.CompileStatic
 
 class HomeController {
 
@@ -27,14 +28,26 @@ class HomeController {
         }
     }
 
-
+    @CompileStatic
     def viewAccount(){
-        //here u can call decrypt and retrieve data
+        String accountId= params.id
+        String secretKey=params.secretKey
+        if(!secretKey){
+            //should be retrieved from session
+            secretKey='test'
+        }
+        def account= homeService.viewAccount(accountId.toLong(),secretKey)
+        render(view: 'edit' , model: [account: account])
     }
 
-
+    @CompileStatic
     def deleteAccount(){
-
+        String accountId= params.id
+        String secretKey=params.secretKey
+        def statusFlag=homeService.deleteAccount(accountId?.toLong(),secretKey)
+        if(statusFlag){
+            render 'success' as JSON
+        }
     }
 
 
@@ -46,11 +59,11 @@ class HomeController {
 
     }
 
+    @CompileStatic
     def getListOfUserNames(){
         def listOfUserNames = homeService.getListOfUsernames(params.id)
         render listOfUserNames as JSON
     }
-
 
     def listAllAccounts(){
         def secretKey= params.secretKey
