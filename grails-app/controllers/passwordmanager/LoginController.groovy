@@ -38,4 +38,8 @@ static defaultAction = "index"
         //Rightnow will go with this approach, thiw will encrypt all username pasword again.
     }
 
+    def retrieveSecretKey(){
+        return
+    }
+
 }
