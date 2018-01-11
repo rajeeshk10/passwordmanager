@@ -1,6 +1,7 @@
 package passwordmanager
 
 import grails.converters.JSON
+import groovy.transform.CompileStatic
 
 class HomeController {
 
@@ -21,19 +22,32 @@ class HomeController {
     def saveAccount(){
         def secretKey= params.secretKey
         Account account=new Account(params.account)
-        homeService.validateAndSave(account)
-        redirect (action : "listAllAccounts")
+        def result = homeService.saveAccount(account,secretKey)
+        if(result.success){
+            redirect (action : "listAllAccounts" , params: [secretKey: secretKey])
+        }
     }
 
-
+    @CompileStatic
     def viewAccount(){
-        //here u can call decrypt and retrieve data
-
+        String accountId= params.id
+        String secretKey=params.secretKey
+        if(!secretKey){
+            //should be retrieved from session
+            secretKey='test'
+        }
+        def account= homeService.viewAccount(accountId.toLong(),secretKey)
+        render(view: 'edit' , model: [account: account])
     }
 
-
+    @CompileStatic
     def deleteAccount(){
-
+        String accountId= params.id
+        String secretKey=params.secretKey
+        def statusFlag=homeService.deleteAccount(accountId?.toLong(),secretKey)
+        if(statusFlag){
+            render 'success' as JSON
+        }
     }
 
 
@@ -45,16 +59,17 @@ class HomeController {
 
     }
 
+    @CompileStatic
     def getListOfUserNames(){
         def listOfUserNames = homeService.getListOfUsernames(params.id)
         render listOfUserNames as JSON
     }
 
-
     def listAllAccounts(){
+        def secretKey= params.secretKey
         List accountObjList = new ArrayList()
         Account.list().each{accountObj ->
-            Account actObj=homeService.decryptAccountObj(accountObj)
+            Account actObj=homeService.decryptAccountObj(accountObj,secretKey)
             accountObjList.add(actObj)
         }
         render (view : 'index' , model: [listOfAccounts : accountObjList])
