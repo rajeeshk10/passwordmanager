@@ -1,0 +1,6 @@
+dataSource:
+    dbCreate: update
+    url: 'jdbc:mysql://localhost:3326/pwdmgr?useUnicode=yes&characterEncoding=UTF-8'
+    username: 'RootUser'
+    password: '@Password123'
+    logSql: true
